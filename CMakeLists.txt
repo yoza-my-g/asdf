@@ -9,3 +9,17 @@ endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+include(FetchContent)
+FetchContent_Declare(
+        metalang99
+        URL https://github.com/Hirrolot/metalang99/archive/refs/tags/v1.13.3.tar.gz
+)
+FetchContent_MakeAvailable(metalang99)
+target_link_libraries(${PROJECT_NAME} metalang99)
+if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(${PROJECT_NAME} PRIVATE -fmacro-backtrace-limit=1)
+elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(${PROJECT_NAME} PRIVATE -ftrack-macro-expansion=0)
+endif ()
+
