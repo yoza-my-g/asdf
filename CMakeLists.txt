@@ -16,4 +16,4 @@ FetchContent_Declare(
         URL https://github.com/Hirrolot/metalang99/archive/refs/tags/v1.13.3.tar.gz
 )
 FetchContent_MakeAvailable(metalang99)
-target_link_libraries(${PROJECT_NAME} metalang99)
+target_link_libraries(${PROJECT_NAME} INTERFACE metalang99)
