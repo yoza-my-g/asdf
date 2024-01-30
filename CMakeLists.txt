@@ -17,3 +17,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(metalang99)
 target_link_libraries(${PROJECT_NAME} INTERFACE metalang99)
+if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(${PROJECT_NAME} PRIVATE -fmacro-backtrace-limit=1)
+elseif (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(${PROJECT_NAME} PRIVATE -ftrack-macro-expansion=0)
+endif ()
+
